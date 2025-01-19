@@ -14,19 +14,29 @@ const App = () => {
   ]);
 
   const handleViewSort = () => {
-    let viewSortData = tableData.sort((a, b) => a.views - b.views);
-    setTableData([viewSortData]);
+    let viewSortData = [...tableData].sort((a, b) => a.views - b.views);
+    setTableData(viewSortData);
+  };
+
+  const handleDateSort = () => {
+    let dateSortData = [...tableData].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
+    setTableData(dateSortData);
   };
 
   return (
     <div>
       <h1> Date and Views Table </h1>
       <div className="sortingButtons" style={{ display: "flex" }}>
-        <button> Sort by Date </button>
+        <button onClick={handleDateSort} style={{ marginRight: "20px" }}>
+          {" "}
+          Sort by Date{" "}
+        </button>
         <button onClick={handleViewSort}> Sort by Views </button>
       </div>
       <table>
-        <tr style={{ marginRight: "2px" }}>
+        <tr>
           <th> Date </th>
           <th> Views </th>
           <th> Article </th>
